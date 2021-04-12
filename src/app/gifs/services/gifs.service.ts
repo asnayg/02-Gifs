@@ -10,16 +10,16 @@ export class GifsService {
 
   private apikey:string = 'ASo2J9irR2YmHVR03o8FHAUIYxLDrBbj';
   private _historial: string[] = [];
-  public resultado : Gif[] = [];
+  public resultado: Gif[] = [];
 
   get historial(){
     return [...this._historial];
   }
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient) {
 
-    this._historial = JSON.parse( localStorage.getItem('historial')! ) || []
-    this.resultado = JSON.parse( localStorage.getItem('resultado')! ) || []
+    this._historial = JSON.parse( localStorage.getItem('historial')! ) || [];
+    this.resultado = JSON.parse( localStorage.getItem('resultado')! ) || [];
     //if ( localStorage.getItem('historial') )
     //  this._historial = JSON.parse( localStorage.getItem('historial')! )
 
@@ -32,7 +32,7 @@ export class GifsService {
       this._historial.unshift( query);
       this._historial = this._historial.splice(0,10);
 
-      localStorage.setItem('historial', JSON.stringify(this._historial) )
+      localStorage.setItem('historial', JSON.stringify(this._historial) );
     }
     //console.log(this._historial);
 
@@ -44,9 +44,9 @@ export class GifsService {
     this.http.get<SearchGifsResponse> (`https://api.giphy.com/v1/gifs/search`, {params: params} )
         .subscribe( (resp) => {
           console.log(resp.data);
-          this.resultado = resp.data; 
+          this.resultado = resp.data;
           localStorage.setItem('resultado', JSON.stringify(this.resultado) )
-        })
+        });
 
   }
 

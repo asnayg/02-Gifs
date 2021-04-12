@@ -10,18 +10,19 @@ import { GifsService } from '../services/gifs.service';
 export class BusquedaComponent implements OnInit {
 
   constructor(
-      private gifsService:GifsService
+      private gifsService: GifsService
       ) { }
+
+  @ViewChild('txtBuscar') txtBuscar!: ElementRef<HTMLInputElement>; // ! dice que nunca sera nulo
 
   ngOnInit(): void {
   }
 
-  @ViewChild('txtBuscar') txtBuscar!:ElementRef<HTMLInputElement>; // ! dice que nunca sera nulo
-
-  buscar(){
-    const valor = this.txtBuscar.nativeElement.value
-    if(valor.trim().length > 0)
+  buscar( ): void {
+    const valor = this.txtBuscar.nativeElement.value;
+    if (valor.trim().length > 0) {
       this.gifsService.buscarGifs(valor);
+    }
     this.txtBuscar.nativeElement.value = '';
   }
 
